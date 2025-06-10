@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="48.0px"
+   height="48.0px"
+   viewBox="0 0 48.0 48.0"
+   version="1.1"
+   id="SVGRoot"
+   sodipodi:docname="a4m-icon.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1950"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     showgrid="true"
+     inkscape:zoom="12.372166"
+     inkscape:cx="26.874841"
+     inkscape:cy="31.481957"
+     inkscape:window-width="1920"
+     inkscape:window-height="1019"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1956" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1945" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g2347"
+       transform="matrix(0.32823715,0,0,0.32823715,-3.4237041,-11.32371)">
+      <rect
+         style="fill:#222240;fill-opacity:1;stroke-width:0.263956"
+         id="rect397"
+         width="146.23573"
+         height="146.23573"
+         x="10.430587"
+         y="34.498562"
+         ry="73.117867" />
+      <path
+         style="fill:none;stroke:#007680;stroke-width:16.865;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+         d="M 131.91025,133.71746 108.66995,61.522676 83.548447,119.80274 134.8772,102.4337"
+         id="path1319" />
+      <use
+         x="0"
+         y="0"
+         xlink:href="#path1319"
+         id="use1321"
+         transform="matrix(-1,0,0,1,167.09689,1.1666667e-7)"
+         style="stroke:#007680;stroke-opacity:1" />
+      <path
+         style="fill:none;stroke:#c63e3e;stroke-width:16.865;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.685955,145.01039 c 3.774458,11.10951 39.191595,11.22911 43.109105,0"
+         id="path1580"
+         sodipodi:nodetypes="cc" />
+    </g>
+  </g>
+</svg>
