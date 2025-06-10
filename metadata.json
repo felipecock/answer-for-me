@@ -1,0 +1,7 @@
+{
+  "name": "AnswerForMe Call Assistant",
+  "description": "A React application that simulates a phone call interface with features like answering, rejecting, and an AI-powered 'AnswerForMe' assistant. It demonstrates different call states and microphone interaction.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
