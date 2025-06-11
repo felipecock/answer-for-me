@@ -1,0 +1,59 @@
+/*
+  answer-for-me theme: based on a4m-icon.svg
+  Main colors:
+    - Fondo principal: #09182b (azul oscuro)
+    - Gradiente: #975cf6 (morado), #3cb1c3 (turquesa)
+    - Textos claros: #f3f4f6
+    - Grises: #2d3748, #4a5568
+*/
+@import "tailwindcss";
+
+:root {
+  --a4m-bg: #09182b;
+  --a4m-primary: #7d3eea;
+  --a4m-accent: #3cb1c3;
+  --a4m-text: #f3f4f6;
+  --a4m-gray-dark: #2d3748;
+  --a4m-gray: #4a5568;
+  --a4m-radius: 1.25rem;
+}
+
+.a4m {
+  &__body {
+    background: var(--a4m-gray-dark);
+    color: var(--a4m-text);
+  }
+  &__gradient {
+    background: linear-gradient(90deg, var(--a4m-primary) 25%, var(--a4m-accent) 75%);
+  }
+  &__card {
+    background: var(--a4m-gray-dark);
+    border-radius: var(--a4m-radius);
+    color: var(--a4m-text);
+    box-shadow: 0 4px 32px 0 rgba(0,0,0,0.25);
+  }
+  &__btn {
+    @apply p-4 rounded-full transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900;
+    &--primary {
+      background: var(--a4m-primary);
+      color: #fff;
+      &:hover {
+        background: #975cf6;
+      }
+    }
+    &--accent {
+      background: var(--a4m-accent);
+      color: #fff;
+      &:hover {
+        background: #2e8fa3;
+      }
+    }
+  }
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--a4m-gray);
+}
+::-webkit-scrollbar-track {
+  background: var(--a4m-gray-dark);
+}
