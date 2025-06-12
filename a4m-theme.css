@@ -1,0 +1,112 @@
+@import 'tailwindcss';
+
+:root {
+  --a4m-bg: #09182b;
+  --a4m-primary: #7d3eea;
+  --a4m-accent: #3cb1c3;
+  --a4m-text: #f3f4f6;
+  --a4m-gray-dark: #2d3748;
+  --a4m-gray: #4a5568;
+  --a4m-radius: 1.25rem;
+}
+
+@theme {
+  --color-a4m-bg: var(--a4m-bg);
+  --color-a4m-primary: var(--a4m-primary);
+  --color-a4m-accent: var(--a4m-accent);
+  --color-a4m-text: var(--a4m-text);
+  --color-a4m-gray-dark: var(--a4m-gray-dark);
+  --color-a4m-gray: var(--a4m-gray);
+  --color-gradient-a4m: linear-gradient(
+    to right,
+    var(--a4m-primary),
+    var(--a4m-accent)
+  );
+  --border-radius-a4m: var(--a4m-radius);
+  --scrollbar-thumb-a4m: var(--a4m-gray);
+  --scrollbar-track-a4m: var(--a4m-gray-dark);
+}
+
+@layer base {
+  body {
+    @apply bg-a4m-bg text-a4m-text overscroll-none;
+  }
+
+  button {
+    @apply px-8
+      py-4
+      text-lg
+      bg-a4m-primary
+      font-semibold
+      flex
+      items-center
+      space-x-2
+      rounded-full
+      transition-all
+      duration-150
+      ease-in-out
+      focus:outline-none
+      focus:ring-2
+      focus:ring-offset-2
+      focus:ring-offset-a4m-gray-dark;
+
+    &:disabled {
+      @apply cursor-not-allowed opacity-50;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track-a4m);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb-a4m);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--a4m-gray);
+  }
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+}
+
+@layer components {
+  .a4m__gradient {
+    @apply bg-gradient-to-r
+      from-a4m-primary
+      to-a4m-accent;
+  }
+
+  .a4m__card {
+    @apply bg-a4m-gray-dark p-6 shadow-lg text-a4m-text;
+  }
+
+  .a4m__btn {
+    @apply px-8 py-4 text-lg bg-a4m-primary font-semibold flex items-center space-x-2 rounded-full transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-a4m-gray-dark;
+
+    &--primary {
+      @apply bg-a4m-primary text-white hover:brightness-110;
+    }
+
+    &--accent {
+      @apply bg-a4m-accent text-white hover:brightness-110;
+    }
+
+    &--rounded {
+      @apply rounded-full p-4;
+    }
+
+    &:disabled {
+      @apply cursor-not-allowed opacity-50;
+    }
+  }
+}

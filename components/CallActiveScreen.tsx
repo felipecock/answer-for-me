@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { CallerInfo } from '../types';
 import { ActionButton } from './ActionButton';
@@ -13,9 +12,9 @@ interface CallActiveScreenProps {
 
 export const CallActiveScreen: React.FC<CallActiveScreenProps> = ({ callerInfo, isMicrophoneActive, onHangUp, callDuration }) => {
   return (
-    <div className="flex flex-col items-center justify-between h-full p-8 bg-gray-800 rounded-lg shadow-2xl">
+    <div className="flex flex-col items-center justify-between h-full p-8 a4m__body rounded-lg shadow-2xl">
       <div className="text-center">
-        <UserCircleIcon className="w-24 h-24 mx-auto text-green-400 mb-4" />
+        <UserCircleIcon className="w-24 h-24 mx-auto" style={{ color: 'var(--a4m-accent)' }} />
         <h2 className="text-3xl font-bold">{callerInfo.name}</h2>
         <p className="text-xl text-gray-400">{callerInfo.number}</p>
         <p className="text-2xl text-white mt-4">{callDuration}</p>
@@ -32,7 +31,7 @@ export const CallActiveScreen: React.FC<CallActiveScreenProps> = ({ callerInfo, 
         <ActionButton
           onClick={onHangUp}
           ariaLabel="Colgar llamada"
-          className="bg-red-500 hover:bg-red-600 active:bg-red-700 text-white focus:ring-red-400"
+          className="a4m__btn--rounded bg-red-500 hover:bg-red-600 active:bg-red-700 text-white focus:ring-red-400"
         >
           <PhoneXMarkIcon className="w-10 h-10" />
         </ActionButton>

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback, useRef } from 'react'; // Added useRef
 import { CallState, CallerInfo } from './types';
 import { IncomingCallScreen } from './components/IncomingCallScreen';
@@ -15,7 +14,9 @@ const App: React.FC = () => {
   const callTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const formatDuration = (seconds: number): string => {
-    const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+    const mins = Math.floor(seconds / 60)
+      .toString()
+      .padStart(2, '0');
     const secs = (seconds % 60).toString().padStart(2, '0');
     return `${mins}:${secs}`;
   };
@@ -24,7 +25,7 @@ const App: React.FC = () => {
     setCallDuration(0);
     if (callTimerRef.current) clearInterval(callTimerRef.current);
     callTimerRef.current = setInterval(() => {
-      setCallDuration(prev => prev + 1);
+      setCallDuration((prev) => prev + 1);
     }, 1000);
   }, []);
 
@@ -39,13 +40,13 @@ const App: React.FC = () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       // In a real app, you'd use this stream. For now, just confirm access.
-      stream.getTracks().forEach(track => track.stop()); // Release mic immediately
+      stream.getTracks().forEach((track) => track.stop()); // Release mic immediately
       setIsMicrophoneActive(true);
       return true;
     } catch (err) {
-      console.error("Error accessing microphone:", err);
+      console.error('Error accessing microphone:', err);
       setIsMicrophoneActive(false);
-      alert("No se pudo acceder al micrófono. Por favor, revisa los permisos.");
+      alert('No se pudo acceder al micrófono. Por favor, revisa los permisos.');
       return false;
     }
   };
@@ -56,7 +57,9 @@ const App: React.FC = () => {
       { id: '2', name: 'Llamada Sospechosa', number: '+1-555-0100' },
       { id: '3', name: 'Privado', number: 'Oculto' },
     ];
-    setCurrentCaller(unknownCallers[Math.floor(Math.random() * unknownCallers.length)]);
+    setCurrentCaller(
+      unknownCallers[Math.floor(Math.random() * unknownCallers.length)]
+    );
     setCallState(CallState.INCOMING_CALL);
   };
 
@@ -68,7 +71,6 @@ const App: React.FC = () => {
     setCallDuration(0);
   }, [stopCallTimer]);
 
-
   const handleEndCallDisplay = useCallback(() => {
     setCallState(CallState.CALL_ENDED_DISPLAY);
     stopCallTimer();
@@ -76,7 +78,6 @@ const App: React.FC = () => {
       resetCallState();
     }, 2000); // Display "Call Ended" for 2 seconds
   }, [resetCallState, stopCallTimer]);
-
 
   const handleAnswerCall = async () => {
     const micGranted = await requestMicrophone();
@@ -101,11 +102,11 @@ const App: React.FC = () => {
 
   const handleTakeOverCall = async () => {
     const micGranted = await requestMicrophone();
-     if (micGranted) {
+    if (micGranted) {
       setCallState(CallState.LIVE_CALL);
       startCallTimer();
     } else {
-      setCallState(CallState.LIVE_CALL); 
+      setCallState(CallState.LIVE_CALL);
       startCallTimer();
     }
   };
@@ -113,7 +114,7 @@ const App: React.FC = () => {
   const handleHangUp = () => {
     handleEndCallDisplay();
   };
-  
+
   // Clean up timer on unmount
   useEffect(() => {
     return () => {
@@ -121,24 +122,34 @@ const App: React.FC = () => {
     };
   }, [stopCallTimer]);
 
-
   const renderContent = () => {
-    if (!currentCaller && callState !== CallState.IDLE && callState !== CallState.CALL_ENDED_DISPLAY) {
-        // Should not happen, but as a fallback
-        resetCallState();
-        return null;
+    if (
+      !currentCaller &&
+      callState !== CallState.IDLE &&
+      callState !== CallState.CALL_ENDED_DISPLAY
+    ) {
+      // Should not happen, but as a fallback
+      resetCallState();
+      return null;
     }
 
     switch (callState) {
       case CallState.IDLE:
         return (
           <div className="flex flex-col items-center justify-center h-full text-center">
-            <h1 className="text-4xl font-bold mb-8 text-white">AnswerForMe</h1>
-            <p className="mb-8 text-lg text-gray-300">Listo para filtrar tus llamadas.</p>
+            <h1
+              className="text-4xl font-bold mb-8 a4m__gradient bg-clip-text text-transparent"
+              style={{ WebkitBackgroundClip: 'text', backgroundClip: 'text' }}
+            >
+              AnswerForMe
+            </h1>
+            <p className="mb-8 text-lg text-gray-300">
+              Listo para filtrar tus llamadas.
+            </p>
             <ActionButton
               onClick={handleSimulateIncomingCall}
               ariaLabel="Simular llamada entrante"
-              className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 text-lg font-semibold flex items-center space-x-2 focus:ring-blue-400"
+              className="a4m__btn--primary"
             >
               <PhoneIcon className="w-6 h-6" />
               <span>Simular Llamada Entrante</span>
@@ -174,23 +185,30 @@ const App: React.FC = () => {
       case CallState.CALL_ENDED_DISPLAY:
         return (
           <div className="flex flex-col items-center justify-center h-full text-center">
-            <h2 className="text-3xl font-bold text-gray-300">Llamada Finalizada</h2>
+            <h2 className="text-3xl font-bold text-gray-300">
+              Llamada Finalizada
+            </h2>
           </div>
         );
       default:
         // Should not happen with current states, but good for safety
-        resetCallState(); 
+        resetCallState();
         return (
-             <div className="flex flex-col items-center justify-center h-full text-center">
-                <p className="text-xl text-red-400">Estado desconocido. Reiniciando...</p>
-             </div>
+          <div className="flex flex-col items-center justify-center h-full text-center">
+            <p className="text-xl text-red-400">
+              Estado desconocido. Reiniciando...
+            </p>
+          </div>
         );
     }
   };
 
   return (
-    <div className="container mx-auto p-4 max-w-lg h-screen flex flex-col justify-center">
-      <div className="bg-gray-900 text-white rounded-xl shadow-2xl overflow-hidden" style={{ height: '80vh', minHeight: '500px', maxHeight: '700px' }}>
+    <div className="mx-auto p-4 max-w-lg h-screen flex flex-col justify-center">
+      <div
+        className="bg-red text-a4m-text rounded-xl shadow-2xl overflow-hidden bg-a4m-bg"
+        style={{ height: '80vh', minHeight: '500px', maxHeight: '700px' }}
+      >
         {renderContent()}
       </div>
     </div>

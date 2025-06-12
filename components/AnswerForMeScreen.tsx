@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { CallerInfo } from '../types';
 import { ActionButton } from './ActionButton';
@@ -35,9 +34,9 @@ export const AnswerForMeScreen: React.FC<AnswerForMeScreenProps> = ({ callerInfo
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-between h-full p-8 bg-gray-800 rounded-lg shadow-2xl">
+    <div className="flex flex-col items-center justify-between h-full p-8 a4m__body rounded-lg shadow-2xl">
       <div className="text-center">
-        <UserCircleIcon className="w-24 h-24 mx-auto text-purple-400 mb-4" />
+        <UserCircleIcon className="w-24 h-24 mx-auto" style={{ color: 'var(--a4m-primary)' }} />
         <h2 className="text-3xl font-bold">{callerInfo.name}</h2>
         <p className="text-xl text-gray-400">{callerInfo.number}</p>
         {isPlayingGreeting && (
@@ -57,7 +56,7 @@ export const AnswerForMeScreen: React.FC<AnswerForMeScreenProps> = ({ callerInfo
           <ActionButton
             onClick={onHangUp}
             ariaLabel="Colgar llamada"
-            className="bg-red-500 hover:bg-red-600 active:bg-red-700 text-white focus:ring-red-400"
+            className="a4m__btn--rounded bg-red-500 hover:bg-red-600 active:bg-red-700 text-white focus:ring-red-400"
           >
             <PhoneXMarkIcon className="w-8 h-8" />
           </ActionButton>
@@ -67,7 +66,7 @@ export const AnswerForMeScreen: React.FC<AnswerForMeScreenProps> = ({ callerInfo
           <ActionButton
             onClick={onTakeOverCall}
             ariaLabel="Tomar llamada"
-            className="bg-green-500 hover:bg-green-600 active:bg-green-700 text-white focus:ring-green-400"
+            className="a4m__btn--rounded bg-green-500 hover:bg-green-600 active:bg-green-700 text-white focus:ring-green-400"
             disabled={isPlayingGreeting}
           >
             <MicrophoneIcon className="w-8 h-8" />
