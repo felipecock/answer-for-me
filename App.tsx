@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'; // Added useRef
+import { useTranslation } from 'react-i18next';
 import { CallState, CallerInfo } from './types';
 import { IncomingCallScreen } from './components/IncomingCallScreen';
 import { AnswerForMeScreen } from './components/AnswerForMeScreen';
@@ -7,6 +8,7 @@ import { ActionButton } from './components/ActionButton';
 import { PhoneIcon } from './components/icons';
 
 const App: React.FC = () => {
+  const { t, i18n } = useTranslation();
   const [callState, setCallState] = useState<CallState>(CallState.IDLE);
   const [currentCaller, setCurrentCaller] = useState<CallerInfo | null>(null);
   const [isMicrophoneActive, setIsMicrophoneActive] = useState<boolean>(false);
@@ -137,23 +139,33 @@ const App: React.FC = () => {
       case CallState.IDLE:
         return (
           <div className="flex flex-col items-center justify-center h-full text-center">
-            <h1
-              className="text-4xl font-bold mb-8 a4m__gradient bg-clip-text text-transparent"
-              style={{ WebkitBackgroundClip: 'text', backgroundClip: 'text' }}
-            >
-              AnswerForMe
+            <h1 className="text-4xl font-bold a4m__gradient bg-clip-text text-transparent">
+              {t('appName')}
             </h1>
+            <h2 className="text-2xl text-a4m-accent mb-8 italic font-light">
+              {t('appNameSubtitle', 'Call Assistant')}
+            </h2>
             <p className="mb-8 text-lg text-gray-300">
-              Listo para filtrar tus llamadas.
+              {t('readyToFilter', 'Ready to filter your calls.')}
             </p>
             <ActionButton
               onClick={handleSimulateIncomingCall}
-              ariaLabel="Simular llamada entrante"
+              ariaLabel={t('simulateIncomingCall', 'Simulate incoming call')}
               className="a4m__btn--primary"
             >
               <PhoneIcon className="w-6 h-6" />
-              <span>Simular Llamada Entrante</span>
+              <span>{t('simulateIncomingCall', 'Simulate Incoming Call')}</span>
             </ActionButton>
+            <div className="mt-4">
+              <button
+                className="text-sm underline text-a4m-text"
+                onClick={() =>
+                  i18n.changeLanguage(i18n.language === 'en' ? 'es' : 'en')
+                }
+              >
+                {i18n.language === 'en' ? 'Español' : 'English'}
+              </button>
+            </div>
           </div>
         );
       case CallState.INCOMING_CALL:
@@ -186,7 +198,7 @@ const App: React.FC = () => {
         return (
           <div className="flex flex-col items-center justify-center h-full text-center">
             <h2 className="text-3xl font-bold text-gray-300">
-              Llamada Finalizada
+              {t('callEnded', 'Call Ended')}
             </h2>
           </div>
         );
@@ -196,7 +208,7 @@ const App: React.FC = () => {
         return (
           <div className="flex flex-col items-center justify-center h-full text-center">
             <p className="text-xl text-red-400">
-              Estado desconocido. Reiniciando...
+              {t('unknownState', 'Unknown state. Restarting...')}
             </p>
           </div>
         );
@@ -205,10 +217,7 @@ const App: React.FC = () => {
 
   return (
     <div className="mx-auto p-4 max-w-lg h-screen flex flex-col justify-center">
-      <div
-        className="bg-red text-a4m-text rounded-xl shadow-2xl overflow-hidden bg-a4m-bg"
-        style={{ height: '80vh', minHeight: '500px', maxHeight: '700px' }}
-      >
+      <div className="bg-red text-a4m-text rounded-xl shadow-2xl overflow-hidden bg-a4m-bg a4m__main-container">
         {renderContent()}
       </div>
     </div>

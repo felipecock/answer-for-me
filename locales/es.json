@@ -1,0 +1,39 @@
+{
+  "appName": "AnswerForMe",
+  "appNameSubtitle": "Asistente de Llamadas con IA",
+  "appDescriptionTitle": "Descripción de la App",
+  "appDescription": "AnswerForMe es una aplicación web que simula llamadas entrantes, permitiéndote filtrar llamadas desconocidas o sospechosas con la ayuda de un asistente AI.",
+  "purposeTitle": "Propósito",
+  "purpose": "El objetivo de AnswerForMe es ayudarte a filtrar llamadas desconocidas o sospechosas, permitiendo que un asistente AI interactúe primero con el llamante y te permita tomar el control solo si lo deseas.",
+  "featuresTitle": "Características principales",
+  "features": [
+    "Simulación de llamada entrante con datos ficticios.",
+    "Opción de contestar, rechazar o usar el asistente AI.",
+    "El asistente AI reproduce un saludo y espera la respuesta del llamante.",
+    "Puedes tomar el control de la llamada en cualquier momento.",
+    "Indicador visual del estado del micrófono.",
+    "Interfaz moderna y responsiva, con soporte para temas personalizados."
+  ],
+  "screenshotsTitle": "Capturas de pantalla (Flujo de la app)",
+  "installationTitle": "Instalación y uso",
+  "requirements": "Requisitos: Node.js",
+  "installStep1": "Instala las dependencias:",
+  "installStep2": "Crea un archivo .env.local y coloca tu clave de API de Gemini:",
+  "installStep3": "Ejecuta la app:",
+  "openBrowser": "Abre http://localhost:5173 en tu navegador para ver la aplicación.",
+  "structureTitle": "Estructura del proyecto",
+  "structure": [
+    "App.tsx: Componente principal de la app.",
+    "components/: Componentes de UI para los distintos estados de llamada.",
+    "assets/a4m-icon.svg: Logo principal de la app.",
+    "constants.ts: Textos y recursos de audio.",
+    "a4m-theme.css: Tema visual y estilos personalizados."
+  ],
+  "licenseTitle": "Licencia",
+  "license": "Actualmente este proyecto no tiene una licencia definida. Si deseas contribuir o usarlo, por favor contacta al autor.",
+  "developedBy": "Desarrollado con ❤️ por Snoitan.",
+  "readyToFilter": "Listo para filtrar tus llamadas.",
+  "simulateIncomingCall": "Simular Llamada Entrante",
+  "callEnded": "Llamada Finalizada",
+  "unknownState": "Estado desconocido. Reiniciando..."
+}
