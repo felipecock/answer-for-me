@@ -55,9 +55,9 @@ const App: React.FC = () => {
 
   const handleSimulateIncomingCall = () => {
     const unknownCallers = [
-      { id: '1', name: t('unknownCallerName', 'Unknown Number'), number: t('unknownCallerNumber', 'Unknown') },
-      { id: '2', name: t('suspiciousCallName', 'Suspicious Call'), number: '+1-555-0100' },
-      { id: '3', name: t('privateCallName', 'Private'), number: t('privateCallNumber', 'Hidden') },
+      { id: '1', name: t('callers.unknownCallerName'), number: t('callers.unknownCallerNumber') },
+      { id: '2', name: t('callers.suspiciousCallName'), number: '+1-555-0100' },
+      { id: '3', name: t('callers.privateCallName'), number: t('callers.privateCallNumber') },
     ];
     setCurrentCaller(
       unknownCallers[Math.floor(Math.random() * unknownCallers.length)]
@@ -140,21 +140,21 @@ const App: React.FC = () => {
         return (
           <div className="flex flex-col items-center justify-center h-full text-center">
             <h1 className="text-4xl font-bold a4m__gradient bg-clip-text text-transparent">
-              {t('appName')}
+              {t('app.name')}
             </h1>
             <h2 className="text-2xl text-a4m-accent mb-8 italic font-light">
-              {t('appNameSubtitle', 'Call Assistant')}
+              {t('app.subtitle')}
             </h2>
             <p className="mb-8 text-lg text-gray-300">
-              {t('readyToFilter', 'Ready to filter your calls.')}
+              {t('ui.readyToFilter')}
             </p>
             <ActionButton
               onClick={handleSimulateIncomingCall}
-              ariaLabel={t('simulateIncomingCall', 'Simulate incoming call')}
+              ariaLabel={t('ui.simulateIncomingCall')}
               className="a4m__btn--primary"
             >
               <PhoneIcon className="w-6 h-6" />
-              <span>{t('simulateIncomingCall', 'Simulate Incoming Call')}</span>
+              <span>{t('ui.simulateIncomingCall')}</span>
             </ActionButton>
             <div className="mt-4">
               <button
@@ -198,7 +198,7 @@ const App: React.FC = () => {
         return (
           <div className="flex flex-col items-center justify-center h-full text-center">
             <h2 className="text-3xl font-bold text-gray-300">
-              {t('callEnded', 'Call Ended')}
+              {t('ui.callEnded')}
             </h2>
           </div>
         );
@@ -208,7 +208,7 @@ const App: React.FC = () => {
         return (
           <div className="flex flex-col items-center justify-center h-full text-center">
             <p className="text-xl text-red-400">
-              {t('unknownState', 'Unknown state. Restarting...')}
+              {t('ui.unknownState')}
             </p>
           </div>
         );

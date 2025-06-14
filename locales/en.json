@@ -1,58 +1,70 @@
 {
-  "appName": "AnswerForMe",
-  "appNameSubtitle": "AI Call Assistant",
-  "appDescriptionTitle": "App Description",
-  "appDescription": "AnswerForMe is a web app that simulates incoming calls, allowing you to filter unknown or suspicious calls with the help of an AI assistant.",
-  "purposeTitle": "Purpose",
-  "purpose": "The goal of AnswerForMe is to help you filter unknown or suspicious calls, allowing an AI assistant to interact with the caller first and letting you take control only if you wish.",
-  "featuresTitle": "Main Features",
-  "features": [
-    "Simulates incoming calls with fake data.",
-    "Option to answer, reject, or use the AI assistant.",
-    "The AI assistant plays a greeting and waits for the caller's response.",
-    "You can take control of the call at any time.",
-    "Visual indicator for microphone status.",
-    "Modern, responsive interface with support for custom themes."
-  ],
-  "screenshotsTitle": "App Flow Screenshots",
-  "installationTitle": "Installation & Usage",
-  "requirements": "Requirements: Node.js",
-  "installStep1": "Install dependencies:",
-  "installStep2": "Create a .env.local file and add your Gemini API key:",
-  "installStep3": "Run the app:",
-  "openBrowser": "Open http://localhost:5173 in your browser to view the app.",
-  "structureTitle": "Project Structure",
-  "structure": [
-    "App.tsx: Main app component.",
-    "components/: UI components for different call states.",
-    "assets/a4m-icon.svg: Main app logo.",
-    "constants.ts: Texts and audio resources.",
-    "a4m-theme.css: Visual theme and custom styles."
-  ],
-  "readyToFilter": "Ready to filter your calls.",
-  "simulateIncomingCall": "Simulate Incoming Call",
-  "incomingCall": "Incoming call...",
-  "reject": "Reject",
-  "answerWithA4M": "Answer with AnswerForMe",
-  "answer": "Answer",
-  "playingGreeting": "Playing greeting...",
-  "waitingForCaller": "Waiting for caller's response...",
-  "hangUp": "Hang up",
-  "takeCall": "Take call",
-  "microphone": "Microphone:",
-  "microphoneActive": "Active",
-  "microphoneInactive": "Inactive (Error or not allowed)",
-  "callDuration": "Call duration",
-  "caller": "Caller",
-  "callEnded": "Call Ended",
-  "unknownState": "Unknown state. Restarting...",
-  "unknownCallerName": "Unknown Number",
-  "unknownCallerNumber": "Unknown",
-  "suspiciousCallName": "Suspicious Call",
-  "privateCallName": "Private",
-  "privateCallNumber": "Hidden",
-  "a4mGreeting": "Hello, I am the assistant for this line's user. Please tell me your name and the reason for your call so I can connect you.",
-  "licenseTitle": "License",
-  "license": "This project currently has no defined license. If you wish to contribute or use it, please contact the author.",
-  "developedBy": "Developed with ❤️ by Snoitan."
+  "app": {
+    "name": "AnswerForMe",
+    "subtitle": "AI Call Assistant",
+    "descriptionTitle": "App Description",
+    "description": "AnswerForMe is a web app that simulates incoming calls, allowing you to filter unknown or suspicious calls with the help of an AI assistant.",
+    "purposeTitle": "Purpose",
+    "purpose": "The goal of AnswerForMe is to help you filter unknown or suspicious calls, allowing an AI assistant to interact with the caller first and letting you take control only if you wish.",
+    "featuresTitle": "Main Features",
+    "features": [
+      "Simulates incoming calls with fake data.",
+      "Option to answer, reject, or use the AI assistant.",
+      "The AI assistant plays a greeting and waits for the caller's response.",
+      "You can take control of the call at any time.",
+      "Visual indicator for microphone status.",
+      "Modern, responsive interface with support for custom themes."
+    ],
+    "screenshotsTitle": "App Flow Screenshots",
+    "structureTitle": "Project Structure",
+    "structure": [
+      "App.tsx: Main app component.",
+      "components/: UI components for different call states.",
+      "assets/a4m-icon.svg: Main app logo.",
+      "constants.ts: Texts and audio resources.",
+      "a4m-theme.css: Visual theme and custom styles."
+    ],
+    "developedBy": "Developed with ❤️ by Snoitan."
+  },
+  "setup": {
+    "installationTitle": "Installation & Usage",
+    "requirements": "Requirements: Node.js",
+    "installStep1": "Install dependencies:",
+    "installStep2": "Create a .env.local file and add your Gemini API key:",
+    "installStep3": "Run the app:",
+    "openBrowser": "Open http://localhost:5173 in your browser to view the app."
+  },
+  "license": {
+    "title": "License",
+    "text": "This project currently has no defined license. If you wish to contribute or use it, please contact the author."
+  },
+  "ui": {
+    "readyToFilter": "Ready to filter your calls.",
+    "simulateIncomingCall": "Simulate Incoming Call",
+    "callEnded": "Call Ended",
+    "unknownState": "Unknown state. Restarting..."
+  },
+  "call": {
+    "incomingCall": "Incoming call...",
+    "reject": "Reject",
+    "answerWithA4M": "Answer with AnswerForMe",
+    "answer": "Answer",
+    "playingGreeting": "Playing greeting...",
+    "waitingForCaller": "Waiting for caller's response...",
+    "hangUp": "Hang up",
+    "takeCall": "Take call",
+    "microphone": "Microphone:",
+    "microphoneActive": "Active",
+    "microphoneInactive": "Inactive (Error or not allowed)",
+    "callDuration": "Call duration",
+    "caller": "Caller",
+    "a4mGreeting": "Hello, I am the assistant for this line's user. Please tell me your name and the reason for your call so I can connect you."
+  },
+  "callers": {
+    "unknownCallerName": "Unknown Number",
+    "unknownCallerNumber": "Unknown",
+    "suspiciousCallName": "Suspicious Call",
+    "privateCallName": "Private",
+    "privateCallNumber": "Hidden"
+  }
 }

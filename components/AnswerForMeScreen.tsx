@@ -20,7 +20,7 @@ export const AnswerForMeScreen: React.FC<AnswerForMeScreenProps> = ({ callerInfo
     audioRef.current = new Audio(ANSWERFORME_GREETING_AUDIO_SRC);
     audioRef.current.play().catch(error => console.warn("Audio play failed:", error)); // Autoplay might be blocked
 
-    const greetingText = t('a4mGreeting');
+    const greetingText = t('call.a4mGreeting');
     const audioDurationSimulator = greetingText.length * 70; // Approximate duration
     
     const timer = setTimeout(() => {
@@ -43,14 +43,14 @@ export const AnswerForMeScreen: React.FC<AnswerForMeScreenProps> = ({ callerInfo
         <h2 className="text-3xl font-bold">{callerInfo.name}</h2>
         <p className="text-xl text-gray-400">{callerInfo.number}</p>
         {isPlayingGreeting && (
-          <p className="text-lg text-yellow-400 mt-4 animate-pulse">{t('playingGreeting')}</p>
+          <p className="text-lg text-yellow-400 mt-4 animate-pulse">{t('call.playingGreeting')}</p>
         )}
       </div>
 
       <div className="my-6 p-4 bg-gray-700 rounded-lg text-center">
-        <p className="text-lg text-gray-200">{t('a4mGreeting')}</p>
+        <p className="text-lg text-gray-200">{t('call.a4mGreeting')}</p>
         {!isPlayingGreeting && (
-           <p className="text-md text-blue-300 mt-3">{t('waitingForCaller')}</p>
+           <p className="text-md text-blue-300 mt-3">{t('call.waitingForCaller')}</p>
         )}
       </div>
       
@@ -58,23 +58,23 @@ export const AnswerForMeScreen: React.FC<AnswerForMeScreenProps> = ({ callerInfo
         <div className="flex flex-col items-center">
           <ActionButton
             onClick={onHangUp}
-            ariaLabel={t('hangUp')}
+            ariaLabel={t('call.hangUp')}
             className="a4m__btn--rounded bg-red-500 hover:bg-red-600 active:bg-red-700 text-white focus:ring-red-400"
           >
             <PhoneXMarkIcon className="w-8 h-8" />
           </ActionButton>
-          <span className="mt-2 text-sm text-gray-300">{t('hangUp')}</span>
+          <span className="mt-2 text-sm text-gray-300">{t('call.hangUp')}</span>
         </div>
         <div className="flex flex-col items-center">
           <ActionButton
             onClick={onTakeOverCall}
-            ariaLabel={t('takeCall')}
+            ariaLabel={t('call.takeCall')}
             className="a4m__btn--rounded bg-green-500 hover:bg-green-600 active:bg-green-700 text-white focus:ring-green-400"
             disabled={isPlayingGreeting}
           >
             <MicrophoneIcon className="w-8 h-8" />
           </ActionButton>
-          <span className="mt-2 text-sm text-gray-300">{t('takeCall')}</span>
+          <span className="mt-2 text-sm text-gray-300">{t('call.takeCall')}</span>
         </div>
       </div>
     </div>
