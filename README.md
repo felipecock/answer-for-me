@@ -21,10 +21,27 @@ El objetivo de AnswerForMe es ayudarte a filtrar llamadas desconocidas o sospech
 - Indicador visual del estado del micrófono.
 - Interfaz moderna y responsiva, con soporte para temas personalizados.
 
-## 🖥️ Captura de pantalla
+## 🖥️ Capturas de pantalla (Flujo de la app)
 
 <p align="center">
-  <img src="screenshots/answer-for-me_call-screen.png" alt="AnswerForMe UI" width="120" height="120" />
+  <b>1. Llamada entrante</b><br>
+  <img src="screenshots/answer-for-me_incoming-call.png" alt="Llamada entrante" width="350" />
+</p>
+<p align="center">
+  <b>2. Contestando con AnswerForMe (asistente AI)</b><br>
+  <img src="screenshots/answer-for-me_assitant-answer.png" alt="Contestando con AnswerForMe" width="350" />
+</p>
+<p align="center">
+  <b>3. Esperando respuesta del llamante</b><br>
+  <img src="screenshots/answer-for-me_awaiting-response.png" alt="Esperando respuesta" width="350" />
+</p>
+<p align="center">
+  <b>4. Tomando el control de la llamada</b><br>
+  <img src="screenshots/answer-for-me_taking-call.png" alt="Tomando el control" width="350" />
+</p>
+<p align="center">
+  <b>5. Llamada activa</b><br>
+  <img src="screenshots/answer-for-me_call-screen.png" alt="Llamada activa" width="350" />
 </p>
 
 ## ⚙️ Instalación y uso
