@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { CallerInfo } from '../types';
 import { ActionButton } from './ActionButton';
 import { MicrophoneIcon, PhoneXMarkIcon, UserCircleIcon } from './icons';
@@ -11,6 +12,7 @@ interface CallActiveScreenProps {
 }
 
 export const CallActiveScreen: React.FC<CallActiveScreenProps> = ({ callerInfo, isMicrophoneActive, onHangUp, callDuration }) => {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col items-center justify-between h-full p-8 a4m__body rounded-lg shadow-2xl">
       <div className="text-center">
@@ -23,19 +25,19 @@ export const CallActiveScreen: React.FC<CallActiveScreenProps> = ({ callerInfo, 
       <div className="my-6 flex items-center space-x-2 p-3 bg-gray-700 rounded-lg">
         <MicrophoneIcon className={`w-6 h-6 ${isMicrophoneActive ? 'text-green-400 animate-pulse' : 'text-red-400'}`} />
         <span className={`text-sm ${isMicrophoneActive ? 'text-green-300' : 'text-red-300'}`}>
-          Micrófono: {isMicrophoneActive ? 'Activado' : 'Desactivado (Error o no permitido)'}
+          {t('microphone')} {isMicrophoneActive ? t('microphoneActive') : t('microphoneInactive')}
         </span>
       </div>
       
       <div className="flex flex-col items-center mt-10">
         <ActionButton
           onClick={onHangUp}
-          ariaLabel="Colgar llamada"
+          ariaLabel={t('hangUp')}
           className="a4m__btn--rounded bg-red-500 hover:bg-red-600 active:bg-red-700 text-white focus:ring-red-400"
         >
           <PhoneXMarkIcon className="w-10 h-10" />
         </ActionButton>
-        <span className="mt-2 text-sm text-gray-300">Colgar</span>
+        <span className="mt-2 text-sm text-gray-300">{t('hangUp')}</span>
       </div>
     </div>
   );

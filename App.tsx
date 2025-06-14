@@ -55,9 +55,9 @@ const App: React.FC = () => {
 
   const handleSimulateIncomingCall = () => {
     const unknownCallers = [
-      { id: '1', name: 'Número Desconocido', number: 'Desconocido' },
-      { id: '2', name: 'Llamada Sospechosa', number: '+1-555-0100' },
-      { id: '3', name: 'Privado', number: 'Oculto' },
+      { id: '1', name: t('unknownCallerName', 'Unknown Number'), number: t('unknownCallerNumber', 'Unknown') },
+      { id: '2', name: t('suspiciousCallName', 'Suspicious Call'), number: '+1-555-0100' },
+      { id: '3', name: t('privateCallName', 'Private'), number: t('privateCallNumber', 'Hidden') },
     ];
     setCurrentCaller(
       unknownCallers[Math.floor(Math.random() * unknownCallers.length)]
