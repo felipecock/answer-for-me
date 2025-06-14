@@ -24,7 +24,7 @@ El objetivo de AnswerForMe es ayudarte a filtrar llamadas desconocidas o sospech
 ## 🖥️ Captura de pantalla
 
 <p align="center">
-  <img src="assets/a4m-icon.svg" alt="AnswerForMe UI" width="120" height="120" />
+  <img src="screenshots/answer-for-me_call-screen.png" alt="AnswerForMe UI" width="120" height="120" />
 </p>
 
 ## ⚙️ Instalación y uso
