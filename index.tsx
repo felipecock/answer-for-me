@@ -14,3 +14,15 @@ root.render(
     <App />
   </React.StrictMode>
 );
+
+// Registrar Service Worker en producción
+if ('serviceWorker' in navigator) {
+  if (import.meta.env.PROD) {
+    window.addEventListener('load', () => {
+      const swUrl = import.meta.env.BASE_URL + 'service-worker.js';
+      navigator.serviceWorker.register(swUrl).catch((err) => {
+        console.error('SW registration failed', err);
+      });
+    });
+  }
+}

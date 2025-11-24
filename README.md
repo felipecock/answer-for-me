@@ -64,6 +64,61 @@ El objetivo de AnswerForMe es ayudarte a filtrar llamadas desconocidas o sospech
 
 Abre [http://localhost:5173](http://localhost:5173) en tu navegador para ver la aplicación.
 
+## 📱 PWA & Uso Offline
+
+Esta aplicación ahora es una **Progressive Web App (PWA)** con soporte para ejecución offline básica.
+
+### ¿Qué se añadió?
+- `public/manifest.webmanifest`: Definición de nombre, colores y icono.
+- `public/service-worker.js`: Gestiona caché y provee fallback offline.
+- `public/offline.html`: Página mostrada cuando no hay conexión.
+- Registro del Service Worker en `index.tsx` (solo en modo producción).
+
+### Cómo probar modo PWA
+1. Ejecuta el build:
+  ```bash
+  npm run build
+  npm run preview
+  ```
+2. Abre la app en el navegador y espera a que se instale el Service Worker (unos segundos tras cargar).
+3. Abre las DevTools → Application → Service Workers para verificar el registro.
+4. Usa la opción "Add to Home Screen" (en móviles) o instala desde la barra del navegador (en Chrome/Edge).
+
+### Prueba Offline
+1. Tras el primer uso online, abre DevTools → Network y selecciona "Offline".
+2. Refresca: verás la aplicación cargada desde caché. Para la raíz se intentará cargar lo último disponible.
+3. Si una navegación falla, se mostrará `offline.html` como fallback.
+
+### Notas técnicas
+- Estrategia de navegación: network-first con fallback offline.
+- Activos estáticos (JS/CSS/imágenes) usan cache-first con actualización cuando vuelve la conectividad.
+- Puedes ajustar políticas en `public/service-worker.js`.
+
+### Limitaciones actuales
+- No se precachean los bundles con hash generados por Vite automáticamente. Para un precache completo se podría integrar Workbox o un plugin de inyección de manifiesto.
+- El icono usa SVG; para mejor compatibilidad se recomienda añadir PNGs (192x192 y 512x512) en `public/` y referenciarlos en el manifest.
+
+## 🛣️ Despliegue en subruta / Codespaces
+
+Para funcionar tanto en GitHub Codespaces como en un servidor propio, la configuración admite una base dinámica. El valor por defecto ahora es la **raíz** (`/`). Solo necesitas establecer `VITE_BASE_PATH` si desplegarás en una subruta (por ejemplo `/answer-for-me/`).
+
+1. (Opcional) Define la variable `VITE_BASE_PATH` antes de ejecutar si usarás subruta:
+```bash
+export VITE_BASE_PATH="/answer-for-me/"   # si despliegas bajo subdirectorio
+export GEMINI_API_KEY="<tu_api_key>"
+npm run dev
+```
+Para desarrollo o producción en raíz no necesitas exportar la variable, pero puedes hacerlo explícitamente:
+```bash
+export VITE_BASE_PATH="/"
+npm run build
+```
+2. `vite.config.ts` ajusta automáticamente `base` garantizando la barra final.
+3. El Service Worker y el manifest usan rutas relativas (`offline.html`, `assets/...`) para mantener el scope correcto.
+4. El registro del Service Worker utiliza `import.meta.env.BASE_URL`.
+5. Si cambias la subruta, considera incrementar `CACHE_NAME` en `public/service-worker.js` o limpiar caché del navegador.
+
+
 ## 🌐 Multi-idioma
 
 La aplicación soporta actualmente **inglés** y **español**. Para cambiar el idioma:

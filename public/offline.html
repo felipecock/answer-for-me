@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Offline - AnswerForMe</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#1f2937" />
+  <style>
+    body { font-family: system-ui, sans-serif; margin:0; display:flex; min-height:100vh; align-items:center; justify-content:center; background:#1f2937; color:#f3f4f6; }
+    .box { max-width:340px; padding:1.5rem; background:#111827; border:1px solid #374151; border-radius:12px; text-align:center; }
+    h1 { font-size:1.25rem; margin:0 0 .75rem; }
+    p { font-size:.95rem; line-height:1.35; }
+    button { margin-top:1rem; background:#2563eb; border:none; color:#fff; padding:.6rem 1rem; border-radius:8px; font-size:.9rem; cursor:pointer; }
+    button:active { transform:translateY(1px); }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Sin conexión</h1>
+    <p>No se pudo cargar el contenido. Revisa tu conexión y vuelve a intentar.</p>
+    <button onclick="location.reload()">Reintentar</button>
+  </div>
+</body>
+</html>
