@@ -95,10 +95,13 @@ Esta aplicación ahora es una **Progressive Web App (PWA)** con soporte para eje
 - Activos estáticos (JS/CSS/imágenes) usan cache-first con actualización cuando vuelve la conectividad.
 - Puedes ajustar políticas en `public/service-worker.js`.
 
-### Limitaciones actuales
-- No se precachean los bundles con hash generados por Vite automáticamente. Para un precache completo se podría integrar Workbox o un plugin de inyección de manifiesto.
-- El icono usa SVG; para mejor compatibilidad se recomienda añadir PNGs (192x192 y 512x512) en `public/` y referenciarlos en el manifest.
- - Los PNG configurados en el manifest aún son placeholders y deben ser reemplazados por imágenes reales (mismo diseño que SVG). El icono maskable debe tener fondo transparente y márgenes amplios.
+### Precaching avanzado
+- Ahora se usa `vite-plugin-pwa` para precache automático de todos los assets y bundles generados por Vite. El Service Worker se actualiza automáticamente y el manifest se integra en el build.
+- Los iconos PNG se generan desde el SVG ejecutando:
+  ```bash
+  npm run generate:icons
+  ```
+  Incluye versión 180x180 para Apple.
  - Puedes regenerar los iconos desde el SVG original ejecutando:
    ```bash
    npm run generate:icons

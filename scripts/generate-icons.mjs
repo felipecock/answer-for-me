@@ -7,7 +7,8 @@ import sharp from 'sharp';
 const sizes = [
   { name: 'a4m-icon-192.png', size: 192 },
   { name: 'a4m-icon-512.png', size: 512 },
-  { name: 'a4m-icon-maskable-192.png', size: 192, maskable: true }
+  { name: 'a4m-icon-maskable-192.png', size: 192, maskable: true },
+  { name: 'a4m-icon-180.png', size: 180 }
 ];
 
 const svgPath = path.resolve('assets/a4m-icon.svg');
