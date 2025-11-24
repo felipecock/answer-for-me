@@ -5,7 +5,8 @@ import { IncomingCallScreen } from './components/IncomingCallScreen';
 import { AnswerForMeScreen } from './components/AnswerForMeScreen';
 import { CallActiveScreen } from './components/CallActiveScreen';
 import { ActionButton } from './components/ActionButton';
-import { PhoneIcon } from './components/icons';
+import { PhoneIcon, GearIcon } from './components/icons';
+import { SettingsMenu } from './components/SettingsMenu';
 
 const App: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -13,6 +14,7 @@ const App: React.FC = () => {
   const [currentCaller, setCurrentCaller] = useState<CallerInfo | null>(null);
   const [isMicrophoneActive, setIsMicrophoneActive] = useState<boolean>(false);
   const [callDuration, setCallDuration] = useState<number>(0);
+  const [showSettings, setShowSettings] = useState<boolean>(false);
   const callTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const formatDuration = (seconds: number): string => {
@@ -156,14 +158,12 @@ const App: React.FC = () => {
               <PhoneIcon className="w-6 h-6" />
               <span>{t('ui.simulateIncomingCall')}</span>
             </ActionButton>
-            <div className="mt-4">
+            <div className="mt-6">
               <button
-                className="text-sm underline text-a4m-text"
-                onClick={() =>
-                  i18n.changeLanguage(i18n.language === 'en' ? 'es' : 'en')
-                }
+                className="text-sm text-a4m-text flex items-center gap-2 border border-a4m-gray px-3 py-2 rounded-md hover:bg-a4m-gray/30"
+                onClick={() => setShowSettings(true)}
               >
-                {i18n.language === 'en' ? 'Español' : 'English'}
+                <GearIcon className="w-5 h-5" /> {t('ui.openSettings')}
               </button>
             </div>
           </div>
@@ -216,9 +216,18 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="mx-auto p-4 max-w-lg h-screen flex flex-col justify-center">
-      <div className="bg-red text-a4m-text rounded-xl shadow-2xl overflow-hidden bg-a4m-bg a4m__main-container">
+    <div className="mx-auto p-4 max-w-lg h-screen flex flex-col justify-center relative">
+      <div className="bg-red text-a4m-text rounded-xl shadow-2xl overflow-hidden bg-a4m-bg a4m__main-container relative">
+        {/* Settings toggle floating button (visible in any state) */}
+        <button
+          aria-label={t('ui.openSettings')}
+          onClick={() => setShowSettings(true)}
+          className="absolute top-3 right-3 p-2 rounded-md bg-a4m-gray/40 hover:bg-a4m-gray/60 focus:outline-none"
+        >
+            <GearIcon className="w-6 h-6" />
+        </button>
         {renderContent()}
+        {showSettings && <SettingsMenu onClose={() => setShowSettings(false)} />}
       </div>
     </div>
   );

@@ -8,8 +8,13 @@ const resources = {
   es: { translation: es },
 };
 
-// Default language is English
-const userLang = navigator.language.startsWith('es') ? 'es' : 'en';
+// Detect previously selected language or fallback to browser preference
+const STORAGE_KEY = 'a4m_lang';
+let userLang = localStorage.getItem(STORAGE_KEY) as 'en' | 'es' | null;
+if (!userLang) {
+  userLang = navigator.language.startsWith('es') ? 'es' : 'en';
+  localStorage.setItem(STORAGE_KEY, userLang);
+}
 
 i18n
   .use(initReactI18next)
@@ -21,5 +26,14 @@ i18n
       escapeValue: false,
     },
   });
+
+// Persist language changes
+i18n.on('languageChanged', (lng) => {
+  try {
+    localStorage.setItem(STORAGE_KEY, lng);
+  } catch {
+    // ignore persistence issues
+  }
+});
 
 export default i18n;

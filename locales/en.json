@@ -42,7 +42,14 @@
     "readyToFilter": "Ready to filter your calls.",
     "simulateIncomingCall": "Simulate Incoming Call",
     "callEnded": "Call Ended",
-    "unknownState": "Unknown state. Restarting..."
+    "unknownState": "Unknown state. Restarting...",
+    "openSettings": "Settings",
+    "closeSettings": "Close",
+    "settingsTitle": "Settings",
+    "languageLabel": "Language",
+    "chooseLanguage": "Choose your language",
+    "english": "English",
+    "spanish": "Spanish"
   },
   "call": {
     "incomingCall": "Incoming call...",

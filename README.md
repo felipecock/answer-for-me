@@ -20,6 +20,7 @@ El objetivo de AnswerForMe es ayudarte a filtrar llamadas desconocidas o sospech
 - Puedes tomar el control de la llamada en cualquier momento.
 - Indicador visual del estado del micrófono.
 - Interfaz moderna y responsiva, con soporte para temas personalizados.
+- Soporte multi-idioma (inglés y español) con preferencia persistente.
 
 ## 🖥️ Capturas de pantalla (Flujo de la app)
 
@@ -62,6 +63,16 @@ El objetivo de AnswerForMe es ayudarte a filtrar llamadas desconocidas o sospech
    ```
 
 Abre [http://localhost:5173](http://localhost:5173) en tu navegador para ver la aplicación.
+
+## 🌐 Multi-idioma
+
+La aplicación soporta actualmente **inglés** y **español**. Para cambiar el idioma:
+
+1. Haz clic en el botón de engranaje (Configuración).
+2. Selecciona el idioma deseado.
+3. Tu preferencia se guarda automáticamente y se restaurará en visitas futuras.
+
+Si tu navegador está en español y es tu primera visita, se iniciará en español; de lo contrario, en inglés.
 
 ## 📁 Estructura del proyecto
 

@@ -42,7 +42,14 @@
     "readyToFilter": "Listo para filtrar tus llamadas.",
     "simulateIncomingCall": "Simular Llamada Entrante",
     "callEnded": "Llamada Finalizada",
-    "unknownState": "Estado desconocido. Reiniciando..."
+    "unknownState": "Estado desconocido. Reiniciando...",
+    "openSettings": "Configuración",
+    "closeSettings": "Cerrar",
+    "settingsTitle": "Configuración",
+    "languageLabel": "Idioma",
+    "chooseLanguage": "Elige tu idioma",
+    "english": "Inglés",
+    "spanish": "Español"
   },
   "call": {
     "incomingCall": "Llamada entrante...",
