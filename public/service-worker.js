@@ -38,18 +38,26 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Navigation requests: network-first fallback to offline page
+// Navigation requests: network-first; offline: serve cached index if available, else offline page
 async function handleNavigationRequest(request) {
   try {
     const networkResponse = await fetch(request);
-    // Optionally update cached index.html
-    if (request.mode === 'navigate' && request.url.endsWith('/')) {
+    // Update cached index.html for root path navigations (scope trailing slash)
+    if (request.mode === 'navigate') {
+      // Normalize: store only one key for index
       const cache = await caches.open(CACHE_NAME);
-      cache.put('index.html', networkResponse.clone());
+      // If the URL points to the scope root or explicitly index.html, refresh cached index
+      if (request.url.endsWith('/') || /index\.html$/.test(request.url)) {
+        // Attempt to find real index resource; if server served a directory, we still cache response
+        cache.put('index.html', networkResponse.clone());
+      }
     }
     return networkResponse;
   } catch (err) {
     const cache = await caches.open(CACHE_NAME);
+    // Prefer showing last cached app shell (index.html) when offline
+    const cachedIndex = await cache.match('index.html');
+    if (cachedIndex) return cachedIndex;
     const offline = await cache.match(OFFLINE_URL);
     return offline || new Response('Offline', { status: 503, headers: { 'Content-Type': 'text/plain' } });
   }

@@ -73,6 +73,7 @@ Esta aplicación ahora es una **Progressive Web App (PWA)** con soporte para eje
 - `public/service-worker.js`: Gestiona caché y provee fallback offline.
 - `public/offline.html`: Página mostrada cuando no hay conexión.
 - Registro del Service Worker en `index.tsx` (solo en modo producción).
+ - Iconos PNG recomendados (placeholders pendientes de añadir): `assets/a4m-icon-192.png`, `assets/a4m-icon-512.png`, `assets/a4m-icon-maskable-192.png`.
 
 ### Cómo probar modo PWA
 1. Ejecuta el build:
@@ -97,10 +98,16 @@ Esta aplicación ahora es una **Progressive Web App (PWA)** con soporte para eje
 ### Limitaciones actuales
 - No se precachean los bundles con hash generados por Vite automáticamente. Para un precache completo se podría integrar Workbox o un plugin de inyección de manifiesto.
 - El icono usa SVG; para mejor compatibilidad se recomienda añadir PNGs (192x192 y 512x512) en `public/` y referenciarlos en el manifest.
+ - Los PNG configurados en el manifest aún son placeholders y deben ser reemplazados por imágenes reales (mismo diseño que SVG). El icono maskable debe tener fondo transparente y márgenes amplios.
+ - Puedes regenerar los iconos desde el SVG original ejecutando:
+   ```bash
+   npm run generate:icons
+   ```
+   Esto usa `sharp` y crea: `a4m-icon-192.png`, `a4m-icon-512.png`, `a4m-icon-maskable-192.png` con padding seguro en la versión maskable.
 
 ## 🛣️ Despliegue en subruta / Codespaces
 
-Para funcionar tanto en GitHub Codespaces como en un servidor propio, la configuración admite una base dinámica. El valor por defecto ahora es la **raíz** (`/`). Solo necesitas establecer `VITE_BASE_PATH` si desplegarás en una subruta (por ejemplo `/answer-for-me/`).
+Para funcionar tanto en GitHub Codespaces como en un servidor propio, la configuración admite una base dinámica. El valor por defecto ahora es la **raíz** (`/`). Para GitHub Pages (repositorio de proyecto) debes construir con la subruta `/answer-for-me/`.
 
 1. (Opcional) Define la variable `VITE_BASE_PATH` antes de ejecutar si usarás subruta:
 ```bash
@@ -114,9 +121,10 @@ export VITE_BASE_PATH="/"
 npm run build
 ```
 2. `vite.config.ts` ajusta automáticamente `base` garantizando la barra final.
-3. El Service Worker y el manifest usan rutas relativas (`offline.html`, `assets/...`) para mantener el scope correcto.
-4. El registro del Service Worker utiliza `import.meta.env.BASE_URL`.
-5. Si cambias la subruta, considera incrementar `CACHE_NAME` en `public/service-worker.js` o limpiar caché del navegador.
+3. El Service Worker y el manifest usan rutas relativas (`offline.html`, `assets/...`) para mantener el scope correcto dentro de `/answer-for-me/` tras el build.
+4. El registro del Service Worker utiliza `import.meta.env.BASE_URL` (en producción será `/answer-for-me/`).
+5. Si cambias la subruta, incrementa `CACHE_NAME` en `public/service-worker.js` o limpia la caché del navegador.
+6. Al estar la app en una subruta, metatags sociales (`og:image`, `og:url`) se han configurado con URLs absolutas que apuntan a `https://felipecock.github.io/answer-for-me/` para que los scrapers no fallen.
 
 
 ## 🌐 Multi-idioma
