@@ -1,15 +1,48 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:answer_for_me/main.dart';
 
 void main() {
-  testWidgets('App launches to Login LoginScreen', (WidgetTester tester) async {
+  testWidgets('Login flow to CallScreen smoke test', (
+    WidgetTester tester,
+  ) async {
     // Build our app and trigger a frame.
-    // Note: SipService initialization might print/error in test env, but UI should render.
     await tester.pumpWidget(const AnswerForMeApp());
     await tester.pumpAndSettle();
 
-    // Verify that we are on the Login Screen
+    // Verify correct initial screen
     expect(find.text('SIP Login'), findsOneWidget);
-    expect(find.text('Username (Ext)'), findsOneWidget);
+
+    // Enter Dummy Credentials
+    await tester.enterText(
+      find.ancestor(
+        of: find.text('Username (Ext)'),
+        matching: find.byType(TextFormField),
+      ),
+      '101',
+    );
+    await tester.enterText(
+      find.ancestor(
+        of: find.text('Password'),
+        matching: find.byType(TextFormField),
+      ),
+      'secret',
+    );
+    await tester.enterText(
+      find.ancestor(
+        of: find.text('Domain (IP/Host)'),
+        matching: find.byType(TextFormField),
+      ),
+      'sip.example.com',
+    );
+    await tester.pump();
+
+    // Tap Connect
+    await tester.tap(find.text('Connect'));
+    await tester.pumpAndSettle();
+
+    // Verify navigation to Call Screen
+    expect(find.text('AnswerForMe Active'), findsOneWidget);
+    expect(find.textContaining('Status: registered'), findsOneWidget);
   });
 }

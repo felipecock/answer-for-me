@@ -15,7 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _domainController = TextEditingController();
+  final _domainController = TextEditingController(text: 'sip.telnyx.com');
 
   @override
   Widget build(BuildContext context) {

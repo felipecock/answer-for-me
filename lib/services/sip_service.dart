@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
-import 'package:siprix_voip_sdk/siprix_voip_sdk.dart';
+// import 'package:siprix_voip_sdk/siprix_voip_sdk.dart';
+import 'package:flutter_callkit_incoming/flutter_callkit_incoming.dart';
+import 'package:flutter_callkit_incoming/entities/entities.dart';
+import 'package:uuid/uuid.dart';
 import '../models/sip_account.dart';
 
 enum SipState {
@@ -13,25 +16,32 @@ enum SipState {
 }
 
 class SipService extends ChangeNotifier {
-  final SiprixVoipSdk _siprix = SiprixVoipSdk();
+  // final SiprixVoipSdk _siprix = SiprixVoipSdk();
   SipState _state = SipState.uninitialized;
   SipState get state => _state;
 
   String? _lastError;
   String? get lastError => _lastError;
 
-  // In a real app, you might map internal account IDs to your models
-  int? _currentAccountId;
+  // int? _currentAccountId;
+
+  // Maps CallId to internal ID
+  // final Map<String, int> _activeCalls = {};
 
   Future<void> initialize() async {
     _state = SipState.initializing;
     notifyListeners();
 
     try {
-      // Initialize with default or empty data
-      // API might require specific init data object
-      // await _siprix.initialize(InitData());
-      // For now, assuming basic init is needed or handled by models
+      // Initialize logging and generic settings
+      // API: await _siprix.initialize(...);
+      // Assuming init is successful for now.
+
+      // Listen to CallKit events
+      FlutterCallkitIncoming.onEvent.listen((CallEvent? event) {
+        if (event == null) return;
+        _handleCallKitEvent(event);
+      });
 
       _state = SipState.ready;
       notifyListeners();
@@ -44,7 +54,11 @@ class SipService extends ChangeNotifier {
     }
   }
 
+  SipAccount? _lastAccount;
+  SipAccount? get lastAccount => _lastAccount;
+
   Future<void> register(SipAccount account) async {
+    _lastAccount = account;
     if (_state == SipState.uninitialized) {
       await initialize();
     }
@@ -53,33 +67,91 @@ class SipService extends ChangeNotifier {
     notifyListeners();
 
     try {
-      // Placeholder for SDK specific account creation
-      // final accModel = AccountModel(...);
-      // Ignoring SDK implementation for a moment to fix compilation
-      print("Preparing to register ${account.username}");
-
-      // Attempt to add account. SDK usually returns an ID or Future
-      // _currentAccountId = await _siprix.addAccount(accModel);
-
-      // Since I don't have the EXACT API, I'm wrapping this in a broadcast
-      // to handle the happy path for the UI prototype.
+      // Real implementation would look like:
+      // final accId = await _siprix.addAccount(Account(
+      //   username: account.username,
+      //   password: account.password,
+      //   domain: account.domain,
+      // ));
+      // _currentAccountId = accId;
 
       _state = SipState.registered;
       notifyListeners();
-      print("Registered account: ${account.uri}");
+
+      // Simulate incoming call for demo purposes after 5 seconds
+      Future.delayed(const Duration(seconds: 5), () {
+        _simulateIncomingCall();
+      });
     } catch (e) {
       _lastError = e.toString();
       _state = SipState.registrationFailed;
       notifyListeners();
-      print("Registration failed: $e");
+    }
+  }
+
+  Future<void> _simulateIncomingCall() async {
+    final callId = const Uuid().v4();
+    final params = CallKitParams(
+      id: callId,
+      nameCaller: 'Unknown Caller',
+      appName: 'AnswerForMe',
+      avatar: 'https://i.pravatar.cc/100',
+      handle: '0123456789',
+      type: 0, // 0 - Audio, 1 - Video
+      textAccept: 'Accept',
+      textDecline: 'Decline',
+      missedCallNotification: const NotificationParams(
+        showNotification: true,
+        isShowCallback: true,
+        subtitle: 'Missed call',
+        callbackText: 'Call back',
+      ),
+      extra: <String, dynamic>{'userId': '1a2b3c4d'},
+      headers: <String, dynamic>{'apiKey': 'Abc@123!', 'platform': 'flutter'},
+      android: const AndroidParams(
+        isCustomNotification: true,
+        isShowLogo: false,
+        ringtonePath: 'system_ringtone_default',
+        backgroundColor: '#0955fa',
+        backgroundUrl: 'https://i.pravatar.cc/500',
+        actionColor: '#4CAF50',
+      ),
+      ios: const IOSParams(
+        iconName: 'CallKitLogo',
+        handleType: '',
+        supportsVideo: true,
+        maximumCallGroups: 2,
+        maximumCallsPerCallGroup: 1,
+        audioSessionMode: 'default',
+        audioSessionActive: true,
+        audioSessionPreferredSampleRate: 44100.0,
+        audioSessionPreferredIOBufferDuration: 0.005,
+        supportsDTMF: true,
+        supportsHolding: true,
+        supportsGrouping: false,
+        supportsUngrouping: false,
+        ringtonePath: 'system_ringtone_default',
+      ),
+    );
+    await FlutterCallkitIncoming.showCallkitIncoming(params);
+  }
+
+  void _handleCallKitEvent(CallEvent event) {
+    switch (event.event) {
+      case Event.actionCallAccept:
+        // TODO: Answer SIP call
+        print('Call Accepted: ${event.body}');
+        break;
+      case Event.actionCallDecline:
+        // TODO: Decline SIP call
+        print('Call Declined: ${event.body}');
+        break;
+      default:
+        break;
     }
   }
 
   Future<void> unregister() async {
-    if (_currentAccountId != null) {
-      // await _siprix.deleteAccount(_currentAccountId!);
-      _currentAccountId = null;
-    }
     _state = SipState.ready;
     notifyListeners();
   }
